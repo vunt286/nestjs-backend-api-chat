@@ -15,11 +15,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConversationsModule } from './conversations/conversations.module';
 import { MessagesModule } from './messages/messages.module';
 import { ChatGateway } from './messages/chat.gateway';
+import { FriendshipModule } from './friendship/friendship.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    MongooseModule.forRoot('mongodb+srv://nguyentuanvu120896_db_user:9GukN1DP0sTuSFqd@cluster0.uvb9fob.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tls=true'),//9GukN1DP0sTuSFqd
+    MongooseModule.forRoot('mongodb://localhost:27017/test'),//9GukN1DP0sTuSFqd
     CacheModule,
     UserModule,
     AuthModule,
@@ -27,7 +28,8 @@ import { ChatGateway } from './messages/chat.gateway';
     FileModule,
     ProductModule,
     ConversationsModule,
-    MessagesModule
+    MessagesModule,
+    FriendshipModule
   ],
   controllers: [AppController, StreamController],
   providers: [AppService, AdminService, ChatGateway],
