@@ -20,23 +20,23 @@ export class ChatGateway {
 
   handleConnection(client: Socket) {
     const userId = client.handshake.query.userId as string;
-    console.log(`⚡ Client connected: ${client.id}`);
+    console.log(`Client connected: ${client.id}`);
   }
 
   handleDisconnect(client: Socket) {
-    console.log(`❌ Client disconnected: ${client.id}`);
+    console.log(`Client disconnected: ${client.id}`);
   }
 
-  @SubscribeMessage('joinRoom')
-  handleJoinRoom(@ConnectedSocket() client: Socket, @MessageBody() roomId: string) {
-    client.join(roomId);
-    console.log(`📥 Client ${client.id} joined room ${roomId}`);
+  @SubscribeMessage('joinConversation')
+  handleJoinRoom(@ConnectedSocket() client: Socket, @MessageBody() conversationId: string) {
+    client.join(conversationId);
+    console.log(`Client ${client.id} joinConversation ${conversationId}`);
   }
 
   @SubscribeMessage('leaveRoom')
   handleLeaveRoom(@ConnectedSocket() client: Socket, @MessageBody() roomId: string) {
     client.leave(roomId);
-    console.log(`📤 Client ${client.id} left room ${roomId}`);
+    console.log(`Client ${client.id} left room ${roomId}`);
   }
 
   @SubscribeMessage('joinUserRoom')
