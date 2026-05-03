@@ -74,6 +74,22 @@ export class ConversationsService {
     return result;
   }
 
+  async getChatsDeletedBefore30Days() {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 30);
+
+    return this.conversationModel
+      .find({
+        isDeleted: true,
+        deletedAt: { $lte: cutoff },
+      })
+      .populate('members', 'username email avatar')
+      .populate('admins', 'username email avatar')
+      .populate('lastMessage')
+      .sort({ deletedAt: -1 })
+      .lean();
+  }
+
   async getConversationById(conversationId: string) {
     return this.conversationModel
       .findById(new Types.ObjectId(conversationId)) // ép kiểu ObjectId

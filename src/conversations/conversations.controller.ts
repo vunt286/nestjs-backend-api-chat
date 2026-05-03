@@ -11,6 +11,12 @@ export class ConversationsController {
     return this.conversationsService.getUserConversations(userId);
   }
 
+  // Lấy danh sách các cuộc chat đã bị xoá từ 30 ngày trước trở về trước
+  @Get('deleted-30-days')
+  async getChatsDeletedBefore30Days() {
+    return this.conversationsService.getChatsDeletedBefore30Days();
+  }
+
   // Tạo hoặc tìm chat 1-1
   @Post('private')
   async findOrCreatePrivate(@Body() body: { userChat: string; userGuest: string }) {

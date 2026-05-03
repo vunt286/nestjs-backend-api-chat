@@ -24,6 +24,12 @@ export class Conversation extends Document {
 
     @Prop({ type: [String], default: [] })
     seenBy: string[];
+
+    @Prop({ type: Boolean, default: false })
+    isDeleted: boolean;
+
+    @Prop({ type: Date, default: null })
+    deletedAt: Date;
 }
 
 export const ConversationSchema = SchemaFactory.createForClass(Conversation);
